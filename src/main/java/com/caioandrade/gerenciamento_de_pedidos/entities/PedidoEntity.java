@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "pedidos")
@@ -17,7 +18,7 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String codigo;
+    private UUID codigoPedido;
 
     private LocalDate dataPedido;
 
@@ -26,4 +27,8 @@ public class PedidoEntity {
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private ClienteEntity cliente;
+
+    public void gerarCodigo(){
+        this.codigoPedido = UUID.randomUUID();
+    }
 }
